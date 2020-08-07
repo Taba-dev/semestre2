@@ -2,6 +2,7 @@ package singletonGrupal;
 
 public class Slot extends Juego{
 
+
 	private TipoSlot tipoSlot;
 
 	public Slot(String nombreJuego, TipoSlot tipoSlot) {
