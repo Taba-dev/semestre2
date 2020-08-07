@@ -4,8 +4,8 @@ public class Slot extends Juego{
 
 	private TipoSlot tipoSlot;
 
-	public Slot(TipoSlot tipoSlot) {
-		super();
+	public Slot(String nombreJuego, TipoSlot tipoSlot) {
+		super(nombreJuego);
 		this.tipoSlot = tipoSlot;
 	}
 
