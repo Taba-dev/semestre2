@@ -6,8 +6,6 @@ public class Principal {
 		// TODO Auto-generated method stub
 		Persona p1 = new Persona("Pepe", 12345678, Status.ACTIVO);
 		
-		System.out.println(p1);
-		
 		Casino c1 = Casino.getInstancia();
 		c1.setNombreCasino("El casino de Pepe");
 		c1.setNombreResponsable(p1);
