@@ -23,8 +23,6 @@ public class Casino {
 	};
 	
 	
-	
-	
 	private Casino() {
 		
 	}
