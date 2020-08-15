@@ -2,13 +2,17 @@ package AccesoBD;
 
 import java.sql.*;
 
+import javax.swing.JOptionPane;
+
 
 public class Principal {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		try { //refereciacion de libreria
+		//---------------------REFERENCIACION DE LIBRERIA---------------------
+		
+		try {
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("Libreria referenciada");
@@ -41,15 +45,41 @@ public class Principal {
 		}
 		
 		//---------------------REALIZAR UNA CONSULTA---------------------
+
+
+		String idPersonaST = JOptionPane.showInputDialog("Id: ");
+		Integer idPersona; // Integer es el tipo wrapper del tipo nativo int
+		idPersona = Integer.parseInt(idPersonaST);
+
+		String documento = JOptionPane.showInputDialog("Documento: ");
+		String apellido1 = JOptionPane.showInputDialog("Apellido1: ");
+		String apellido2 = JOptionPane.showInputDialog("Apellido2: ");
+		String nombre1 = JOptionPane.showInputDialog("Nombre1: ");
+		String nombre2 = JOptionPane.showInputDialog("Nombre2: ");
 		
-		String consulta = "SELECT * FROM PERSONA";
+		String INSERT_PERSONA = "INSERT INTO PERSONA (ID_PERSONA,DOCUMENTO,APELLIDO1, APELLIDO2, NOMBRE1, NOMBRE2) values (?,?,?,?,?,?)";
 		
+		String consulta = "SELECT NOMBRE1 FROM PERSONA";
+	
 		try {
+			
+			PreparedStatement statement = connection.prepareStatement(INSERT_PERSONA);
+			statement.setInt(1, idPersona);
+			statement.setString(2, documento);
+			statement.setString(3, apellido1);
+			statement.setString(4, apellido2);
+			statement.setString(5, nombre1);
+			statement.setString(6, nombre2);
+			
+			
+			int filasIngresadas = statement.executeUpdate();
+			
+			System.out.println("Se ingresaron " + filasIngresadas + " filas");
 			
 			Statement sentencia = connection.createStatement();
 			ResultSet personasRS = sentencia.executeQuery(consulta);
 			while (personasRS.next()) {
-				System.out.println("-> "+personasRS.getString("DOCUMENTO")+", "+personasRS.getString("APELLIDO1")+", "+personasRS.getString("NOMBRE1"));
+				System.out.println("-> "+personasRS.getString("NOMBRE1"));
 			}
 			
 		} catch (SQLException e) {

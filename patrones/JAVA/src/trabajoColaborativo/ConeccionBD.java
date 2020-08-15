@@ -7,7 +7,9 @@ public class ConeccionBD {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		try { //refereciacion de libreria
+		//---------------------REFERENCIACION DE LIBRERIA---------------------
+		
+		try {
 			
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			System.out.println("Libreria referenciada");
@@ -73,7 +75,7 @@ public class ConeccionBD {
 			return;
 			
 		}
-			
+
 	}
 
 }

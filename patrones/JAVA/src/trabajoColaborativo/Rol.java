@@ -7,7 +7,7 @@ public class Rol {
 	private String nombre;
 	private String descripcion;
 	
-	private ArrayList funcionalidades;
+	private ArrayList<Funcionalidad> funcionalidades;
 
 	public Rol(String nombre, String descripcion, ArrayList funcionalidades) {
 		super();
