@@ -17,6 +17,9 @@ public class DAOPersona { //DAO: DATA ACCES OBJECT
 	private static final String BUSCAR_PERSONA = "SELECT * FROM PERSONA WHERE APELLIDO1=? AND NOMBRE1=?";
 	private static final String UPDATE_PERSONA = "UPDATE PERSONA SET DOCUMENTO=?, APELLIDO1=?, APELLIDO2=?, NOMBRE1=?, NOMBRE2=? WHERE ID_PERSONA=?";
 	private static final String DELETE_PERSONA = "DELETE FROM PERSONA WHERE ID_PERSONA=?";
+	private static final String MAX_PK = "SELECT MAX(ID_PERSONA) AS MAXID FROM PERSONA";
+
+	
 	
 	//***************************************** METODOS *****************************************
 	
@@ -63,9 +66,24 @@ public class DAOPersona { //DAO: DATA ACCES OBJECT
 	
 	//***************************************** INSERTAR PERSONA *****************************************
 	public static boolean insert(Persona p) {
+		
+		
+		int maxID = 0;
+		int nextID = 0;
+		try {
+			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement(MAX_PK);
+			ResultSet resultado = statement.executeQuery();
+			while(resultado.next()) {
+				maxID = resultado.getInt("MAXID");	
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();	
+		}
+		nextID = maxID+1;
+
 		try {
 			PreparedStatement statement = DatabaseManager.getConnection().prepareStatement(INSERT_PERSONA);
-			statement.setLong(1, 200);
+			statement.setLong(1, nextID);
 			statement.setString(2, p.getDocumento());
 			statement.setString(3, p.getApellido1());
 			statement.setString(4, p.getApellido2());
