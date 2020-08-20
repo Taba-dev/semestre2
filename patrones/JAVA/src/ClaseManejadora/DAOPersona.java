@@ -108,12 +108,11 @@ public class DAOPersona { //DAO: DATA ACCES OBJECT
 			statement.setString(2, nombre1);
 			ResultSet resultado = statement.executeQuery();
 			while(resultado.next()) {
-				
 				personaEncontrada.setDocumento(resultado.getString("DOCUMENTO"));
 				personaEncontrada.setApellido1(resultado.getString("APELLIDO1"));
 				personaEncontrada.setApellido2(resultado.getString("APELLIDO2"));
 				personaEncontrada.setNombre1(resultado.getString("NOMBRE1"));
-				personaEncontrada.setNombre2(resultado.getString("NOMBRE2"));
+				personaEncontrada.setNombre2(resultado.getString("NOMBRE2"));			
 			}	
 		} catch(SQLException e) {
 			e.printStackTrace();
@@ -136,6 +135,7 @@ public class DAOPersona { //DAO: DATA ACCES OBJECT
 			statement.setLong(6, IdPersona);
 
 			int Retorno = statement.executeUpdate();
+			System.out.println(Retorno);
 			return Retorno>0;
 			
 		} catch(SQLException e) {

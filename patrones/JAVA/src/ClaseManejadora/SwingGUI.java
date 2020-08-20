@@ -87,44 +87,23 @@ public class SwingGUI {
 		textPaneCuenta.setVisible(false);
 		textPaneCuenta.setBackground(SystemColor.control);
 		
-		JButton btnNewButton_1 = new JButton("Contar");
-		btnNewButton_1.setBounds(10, 11, 87, 34);
-		panel_1.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JButton btnContar = new JButton("Contar");
+		btnContar.setBounds(10, 11, 87, 34);
+		panel_1.add(btnContar);
 
-				int cuenta = DAOPersona.cuentaPersonas();
-				String cuentaString = "Hay "+Integer.toString(cuenta)+" registros en la base de datos.";
-				textPaneCuenta.setText(cuentaString);
-				textPaneCuenta.setVisible(true);
-			}
-		});
-		
 		JPanel panel_3 = new JPanel();
 		tabbedPane.addTab("Listar", null, panel_3, null);
 		panel_3.setLayout(null);
 		
-		JButton btnNewButton = new JButton("Listar");
-		btnNewButton.setBounds(10, 11, 84, 33);
-		panel_3.add(btnNewButton);
+		JButton btnListar = new JButton("Listar");
+		btnListar.setBounds(10, 11, 84, 33);
+		panel_3.add(btnListar);
 		
 		JTextPane listaPersonas = new JTextPane();
 		listaPersonas.setBackground(SystemColor.menu);
 		listaPersonas.setBounds(10, 45, 353, 238);
 		panel_3.add(listaPersonas);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				LinkedList<Persona> personas = null;
-				personas = DAOPersona.findAll();
-				String personasString = "";
-				for (Persona p1 : personas) {
-					personasString = personasString+p1.nombre1+" "+p1.apellido1+"\n";					
-				}
-				listaPersonas.setText(personasString);
 
-			}
-		});
-		
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("Insertar", null, panel, null);
 		panel.setLayout(null);
@@ -134,9 +113,9 @@ public class SwingGUI {
 		panel.add(textPaneAgregar);
 		textPaneAgregar.setBackground(SystemColor.menu);
 		
-		JButton btnNewButton_2 = new JButton("Agregar");
-		btnNewButton_2.setBounds(20, 156, 86, 37);
-		panel.add(btnNewButton_2);
+		JButton btnAgregar = new JButton("Agregar");
+		btnAgregar.setBounds(20, 156, 86, 37);
+		panel.add(btnAgregar);
 		
 		textFieldDocumento = new JTextField();
 		textFieldDocumento.setBounds(126, 11, 104, 20);
@@ -197,9 +176,9 @@ public class SwingGUI {
 		tabbedPane.addTab("Buscar", null, panel_2, null);
 		panel_2.setLayout(null);
 		
-		JButton btnNewButton_2_1 = new JButton("Buscar");
-		btnNewButton_2_1.setBounds(31, 89, 87, 37);
-		panel_2.add(btnNewButton_2_1);
+		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.setBounds(31, 89, 87, 37);
+		panel_2.add(btnBuscar);
 		
 		textFieldBuscarNombre = new JTextField();
 		textFieldBuscarNombre.setBounds(137, 21, 104, 20);
@@ -306,33 +285,15 @@ public class SwingGUI {
 		textPaneEdit.setBackground(SystemColor.menu);
 		textPaneEdit.setBounds(10, 238, 351, 20);
 		panel_4.add(textPaneEdit);
-		btnEditar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
-				
-				int ID = Integer.valueOf(textFieldEditarID.getText());
-				
-				String editDocumento = textFieldEditDocumento.getText();
-				String editApellido1 = textFieldEditApellido1.getText();
-				String editApellido2 = textFieldEditApellido2.getText();
-				String editNombre1 = textFieldEditNombre1.getText();
-				String editNombre2 = textFieldEditNombre2.getText();
-					
-				Persona personaEditada = new Persona(editDocumento, editApellido1, editApellido2, editNombre1, editNombre2);
 
-				DAOPersona.edit(ID,personaEditada);
-				
-				textPaneEdit.setText("Persona editada correctamente");
-							
-			}
-		});
 		
 		JPanel panel_5 = new JPanel();
 		tabbedPane.addTab("Eliminar", null, panel_5, null);
 		panel_5.setLayout(null);
 		
-		JButton btnNewButton_3 = new JButton("Eliminar");
-		btnNewButton_3.setBounds(162, 5, 81, 33);
-		panel_5.add(btnNewButton_3);
+		JButton btnEliminar = new JButton("Eliminar");
+		btnEliminar.setBounds(162, 5, 81, 33);
+		panel_5.add(btnEliminar);
 		
 		textFieldDelete = new JTextField();
 		textFieldDelete.setColumns(10);
@@ -349,29 +310,33 @@ public class SwingGUI {
 		textPaneDelete.setBackground(SystemColor.menu);
 		textPaneDelete.setBounds(20, 42, 309, 23);
 		panel_5.add(textPaneDelete);
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				int ID = Integer.valueOf(textFieldDelete.getText());
-				
-				boolean asd = DAOPersona.delete(ID);
-				
-				textPaneDelete.setText("Persona eliminada de la base de datos");
 		
-			}
-		});
-		btnNewButton_2_1.addActionListener(new ActionListener() {
+		//***************************************** BOTONES *****************************************
+		
+		btnContar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				String nombreBuscar = textFieldBuscarNombre.getText();
-				String apellidoBuscar = textFieldBuscarApellido.getText();
-	
-				Persona personaEncontrada = DAOPersona.findPersona(apellidoBuscar, nombreBuscar);
-				textPaneBuscar.setText("Se encontro a: "+personaEncontrada.nombre1+ " "+ personaEncontrada.apellido1+" que posee el documento "+ personaEncontrada.documento);
-								
+				int cuenta = DAOPersona.cuentaPersonas();
+				System.out.println("Hay "+Integer.toString(cuenta)+" registros en la base de datos.");
+				String cuentaString = "Hay "+Integer.toString(cuenta)+" registros en la base de datos.";
+				textPaneCuenta.setText(cuentaString);
+				textPaneCuenta.setVisible(true);
 			}
 		});
-		btnNewButton_2.addActionListener(new ActionListener() {
+
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				LinkedList<Persona> personas = null;
+				personas = DAOPersona.findAll();
+				String personasString = "";
+				for (Persona p1 : personas) {
+					personasString = personasString+"> "+p1.nombre1+" "+p1.apellido1+"\n";					
+				}
+				System.out.println(personasString);
+				listaPersonas.setText(personasString);
+			}
+		});
+		
+		btnAgregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String documento = textFieldDocumento.getText();
@@ -383,15 +348,72 @@ public class SwingGUI {
 				if(DAOPersona.insert(p))
 				{
 					textPaneAgregar.setText("Se ha insertado una persona en la base de datos.");
+					System.out.println("Se ha insertado una persona en la base de datos.");
 				}else
 				{
 					textPaneAgregar.setText("No se ha podido insertar una persona en la base de datos.");
+					System.out.println("No se ha podido insertar una persona en la base de datos.");
 				}
-				
-				
 			}
 		});
 		
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String nombreBuscar = textFieldBuscarNombre.getText();
+				String apellidoBuscar = textFieldBuscarApellido.getText();
+	
+				Persona personaEncontrada = DAOPersona.findPersona(apellidoBuscar, nombreBuscar);
+				if (personaEncontrada.nombre1 != null) {
+					System.out.println("Se encontro a: "+personaEncontrada.nombre1+ " "+ personaEncontrada.apellido1+" que posee el documento "+ personaEncontrada.documento);
+					textPaneBuscar.setText("Se encontro a: "+personaEncontrada.nombre1+ " "+ personaEncontrada.apellido1+" que posee el documento "+ personaEncontrada.documento);	
+				} else {
+					System.out.println("No se encontro a la persona");
+					textPaneBuscar.setText("No se encontro a la persona");	
+				}	
+			}
+		});
+		
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				
+				int ID = Integer.valueOf(textFieldEditarID.getText());
+				
+				String editDocumento = textFieldEditDocumento.getText();
+				String editApellido1 = textFieldEditApellido1.getText();
+				String editApellido2 = textFieldEditApellido2.getText();
+				String editNombre1 = textFieldEditNombre1.getText();
+				String editNombre2 = textFieldEditNombre2.getText();
+				Persona personaEditada = new Persona(editDocumento, editApellido1, editApellido2, editNombre1, editNombre2);
 
+				if(DAOPersona.edit(ID,personaEditada))
+				{
+					textPaneEdit.setText("Persona editada correctamente");
+					System.out.println("Persona editada correctamente");
+				}else
+				{
+					textPaneEdit.setText("No se ha podido editar la persona");
+					System.out.println("No se ha podido editar la persona");
+				}		
+			}
+		});
+		
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int ID = Integer.valueOf(textFieldDelete.getText());
+				
+				
+				if(DAOPersona.delete(ID))
+				{
+					textPaneDelete.setText("Persona eliminada de la base de datos");
+					System.out.println("Persona eliminada de la base de datos");
+				}else
+				{
+					textPaneDelete.setText("No se ha podido eliminar la persona");
+					System.out.println("No se ha podido eliminar la persona");
+				}	
+			}
+		});
 	}
 }
