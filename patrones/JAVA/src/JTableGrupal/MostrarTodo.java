@@ -2,7 +2,6 @@ package JTableGrupal;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JFrame;
@@ -16,6 +15,7 @@ public class MostrarTodo extends JFrame {
 	public void mostrar(){
 
 		JFrame frame =new JFrame("Mostrar");
+		frame.setResizable(false);
 
 		// creamos el modelo de Tabla
 		DefaultTableModel modelo= new DefaultTableModel();
